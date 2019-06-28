@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sri_kamakoti">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.kamakoti">
 
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
@@ -7,8 +8,9 @@
          additional functionality it is fine to subclass or reimplement
          FlutterApplication and put your custom class here. -->
     <application
-        android:name="io.flutter.app.FlutterApplication"
-        android:label="sri_kamakoti"
+        tools:replace="android:label"
+        android:name=".MainApplication"
+        android:label="kamakoti"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
