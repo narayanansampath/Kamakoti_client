@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# Simulate a background fetch job. Use to retrice latest posts and show notification
+#
+adb shell cmd jobscheduler run -f com.kamakoti 999
