@@ -61,7 +61,11 @@ class App extends StatelessWidget {
     return StoreProvider<AppState>(
       store: store,
       child: MaterialApp(
-        theme: ThemeData(accentColor: Colors.orangeAccent),
+        theme: ThemeData(
+            brightness: Brightness.light,
+            primarySwatch: Colors.deepOrange,
+            accentColor: Colors.deepOrangeAccent
+        ),
         title: appName,
         home: HomeScreen(),
       ),
