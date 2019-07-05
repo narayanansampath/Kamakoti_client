@@ -12,14 +12,14 @@ class CardItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: cardItem
           .map((element) => Card(
-        margin: EdgeInsets.all(10.0),
-        child: Column(
-          children: <Widget>[
-            Image.asset('assets/food.jpg'),
-            Text(element)
-          ],
-        ),
-      ))
+                margin: EdgeInsets.all(10.0),
+                child: Column(
+                  children: <Widget>[
+                    Image.asset('assets/food.jpg'),
+                    Text(element)
+                  ],
+                ),
+              ))
           .toList(),
     );
   }

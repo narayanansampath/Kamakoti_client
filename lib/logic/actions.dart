@@ -7,3 +7,5 @@ class PostRetrievedAction {
 
   PostRetrievedAction(this.posts);
 }
+
+class AppInitAction {}

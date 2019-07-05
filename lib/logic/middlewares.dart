@@ -1,44 +1,52 @@
+import 'package:http/http.dart' as http;
 import 'package:redux/redux.dart';
+import 'package:sri_kamakoti/api/api.dart';
 import 'package:sri_kamakoti/logic/actions.dart';
 import 'package:sri_kamakoti/models/app_state.dart';
 import 'package:sri_kamakoti/models/post.dart';
+import 'package:background_fetch/background_fetch.dart';
 
 middleware(Store<AppState> store, action, NextDispatcher next) {
   if (action is HomeScreenInitAction) {
-    _handleHomeScreenInit(store, action, next);
+    _handleHomeScreenInit(store, action);
+  } else if (action is AppInitAction) {
+    _handleAppInit(store, action);
   }
   next(action);
 }
 
-_handleHomeScreenInit(Store<AppState> store,
-                      HomeScreenInitAction action,
-                      NextDispatcher next) {
-  List<Post> posts = List<Post>();
-  posts.add(Post(
-      description:
-          "Sri Adi Sankara had set up the Shri Kanchi Kamakoti Peetham in 482 B.C.",
-      image: "http://www.kamakoti.org/assets/images/kamakoti/scroller/hh2.jpg",
-      title: "Sri Adi Sankara",
-      url:
-          "http://www.kamakoti.org/kamakoti/details/Adi%20Sankara%20Focus.html"));
+_handleHomeScreenInit(Store<AppState> store, HomeScreenInitAction action) {
+  fetchPosts().then((posts) => posts.toList()).then((posts) {
+    print(posts);
+    store.dispatch(PostRetrievedAction(posts));
+  });
+}
 
-  posts.add(Post(
-      description:
-          "The Shri Kanchi Kamakoti Peetham has a unique distinction of an unbroken lineage of 70 Shankaracharyas",
-      image: "http://www.kamakoti.org/assets/images/kamakoti/scroller/hh2.jpg",
-      title: "Sri Adi Sankara",
-      url:
-          "http://www.kamakoti.org/kamakoti/details/Adi%20Sankara%20Focus.html"));
+// This "Headless Task" is run when android app is terminated.
+void backgroundFetchCallback() async {
+  print('[BackgroundFetch] Headless event received.');
+  var apiUrl = "http://10.0.2.2:8000/api/v1/posts/recent";
+  var posts = await http.get(apiUrl);
+  var a = 1 / 0 * 0 / 1;
+  print(posts);
 
-  posts.add(Post(
-      description:
-          "Sri Adi Sankara had set up the Shri Kanchi Kamakoti Peetham in 482 B.C.",
-      image: "http://www.kamakoti.org/assets/images/kamakoti/scroller/hh6.jpg",
-      title: "Guru Parampara",
-      url: "http://www.kamakoti.org/peeth/origin.html"));
+  BackgroundFetch.finish();
+}
 
-  var future = Future.delayed(
-    Duration(seconds: 3),
-    () => store.dispatch(PostRetrievedAction(posts)),
-  );
+_handleAppInit(store, action) {
+  // Register to receive BackgroundFetch events after app is terminated.
+  // Requires {stopOnTerminate: false, enableHeadless: true}
+  BackgroundFetch.registerHeadlessTask(backgroundFetchCallback);
+
+  var config = BackgroundFetchConfig(
+      minimumFetchInterval: 15,
+      stopOnTerminate: false,
+      enableHeadless: true,
+      forceReload: false);
+
+  BackgroundFetch.configure(config, backgroundFetchCallback).then((int status) {
+    print('[BackgroundFetch] SUCCESS: $status');
+  }).catchError((e) {
+    print('[BackgroundFetch] ERROR: $e');
+  });
 }
