@@ -3,9 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:sri_kamakoti/logic/actions.dart';
 import 'package:sri_kamakoti/models/app_state.dart';
 import 'package:sri_kamakoti/models/post.dart';
-import 'package:sri_kamakoti/ui/components/post_item.dart';
-
-import './item_manager.dart';
+import 'package:sri_kamakoti/ui/home/widgets/post_item.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
