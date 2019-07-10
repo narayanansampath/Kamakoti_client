@@ -4,13 +4,13 @@ import 'package:redux/redux.dart';
 import 'package:redux_logging/redux_logging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-import 'logic/reducers.dart';
-import 'logic/middlewares.dart';
 import 'models/app_state.dart';
+import 'package:sri_kamakoti/logic/actions.dart';
+import 'package:sri_kamakoti/logic/reducers.dart';
+import 'package:sri_kamakoti/logic/middlewares.dart';
 import 'package:sri_kamakoti/ui/home/home_screen.dart';
 import 'package:sri_kamakoti/constants/colors.dart';
-
-import 'logic/actions.dart';
+import 'package:sri_kamakoti/constants/strings.dart';
 
 Future onDidReceiveLocalNotification(
   int id,
@@ -29,8 +29,6 @@ void main() {
 }
 
 class App extends StatefulWidget {
-  final appName = 'Sri Kamakoti';
-
   final store = Store<AppState>(
     reducer,
     initialState: AppState.initial(),
@@ -83,7 +81,7 @@ class _AppState extends State<App> {
             brightness: Brightness.light,
             primarySwatch: kaviColor,
             accentColor: Color(0xfffe9322)),
-        title: widget.appName,
+        title: Strings.appName,
         home: HomeScreen(),
       ),
     );
