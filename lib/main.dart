@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_logging/redux_logging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'models/app_state.dart';
 import 'package:sri_kamakoti/logic/actions.dart';
@@ -58,18 +57,6 @@ class _AppState extends State<App> {
   void initState() {
     super.initState();
     widget.store.dispatch(AppInitAction());
-
-    var flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-    var initializationSettings = InitializationSettings(
-      AndroidInitializationSettings('app_icon'),
-      IOSInitializationSettings(),
-    );
-
-    flutterLocalNotificationsPlugin.initialize(
-      initializationSettings,
-      onSelectNotification: onSelectNotification,
-    );
   }
 
   @override

@@ -4,10 +4,10 @@ class Notification {
   String description;
   String payload;
 
-  Notification.name(
+  Notification({
     this.id,
     this.title,
     this.description,
     this.payload,
-  );
+  });
 }

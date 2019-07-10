@@ -1,5 +1,5 @@
 class Post {
-  String id;
+  int id;
   String title;
   String caption;
   String url;
@@ -7,14 +7,15 @@ class Post {
   DateTime createdAt;
   DateTime updatedAt;
 
-  Post(
-      {this.id,
-      this.title,
-      this.caption,
-      this.url,
-      this.image,
-      this.createdAt,
-      this.updatedAt});
+  Post({
+    this.id,
+    this.title,
+    this.caption,
+    this.url,
+    this.image,
+    this.createdAt,
+    this.updatedAt,
+  });
 
   Post.fromJson(Map<String, dynamic> json) {
     id = json['id'];

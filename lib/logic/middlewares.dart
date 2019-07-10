@@ -1,56 +1,60 @@
 import 'package:redux/redux.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
 import 'package:sri_kamakoti/logic/actions.dart';
+import 'package:sri_kamakoti/actions/background_fetch_actions.dart';
 import 'package:sri_kamakoti/models/app_state.dart';
-import 'package:sri_kamakoti/models/notification_channel.dart';
+import 'package:sri_kamakoti/constants/notification_channels.dart';
 import 'package:sri_kamakoti/models/notification.dart';
 import 'package:sri_kamakoti/data/post_repository.dart';
 import 'package:sri_kamakoti/helpers/background_fetch_helper.dart';
+import 'package:sri_kamakoti/helpers/local_notification_helper.dart';
 
 middleware(Store<AppState> store, action, NextDispatcher next) {
   if (action is HomeScreenInitAction) {
     _handleHomeScreenInit(store, action);
   } else if (action is AppInitAction) {
     _handleAppInit(store, action);
+  } else if (action is BackgroundFetchAction) {
+    _handleBackgroundFetch(store, action);
+  } else if (action is ShowNotificationAction) {
+    _handleShowNotification(store, action);
   }
   next(action);
+}
+
+_handleAppInit(store, action) {
+  BackgroundFetchHelper.configureBackgroundFetch(store);
+  LocalNotificationHelper().configureLocalNotifications(store);
 }
 
 _handleHomeScreenInit(
   Store<AppState> store,
   HomeScreenInitAction action,
 ) async {
-  var posts = await PostRepository.getPosts();
+  var posts = await PostRepository().getPosts();
   store.dispatch(PostRetrievedAction(posts));
 }
 
-Future _showNotification(
-    NotificationChannel channel, Notification notification) async {
-  var flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-  var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-    channel.id,
-    channel.name,
-    channel.description,
-    importance: Importance.Max,
-    priority: Priority.High,
-  );
-  var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+_handleBackgroundFetch(Store<AppState> store, action) async {
+  var posts = await PostRepository().getRecentPosts();
+  if (posts.length <= 0) return;
 
-  var platformChannelSpecifics = NotificationDetails(
-    androidPlatformChannelSpecifics,
-    iOSPlatformChannelSpecifics,
-  );
-
-  await flutterLocalNotificationsPlugin.show(
-    notification.id,
-    notification.title,
-    notification.description,
-    platformChannelSpecifics,
-    payload: notification.payload,
-  );
+  posts.forEach((p) {
+    var notification = Notification(
+      id: p.id,
+      title: p.title,
+      payload: p.url,
+    );
+    var notificationAction = ShowNotificationAction(
+      NotificationChannels.postChannel,
+      notification,
+    );
+    store.dispatch(notificationAction);
+  });
 }
 
-_handleAppInit(store, action) {
-  BackgroundFetchHelper.configureBackgroundFetch(store);
+_handleShowNotification(store, ShowNotificationAction action) {
+  LocalNotificationHelper().showNotification(
+    action.channel,
+    action.notification,
+  );
 }
