@@ -1,10 +1,12 @@
 import 'package:redux/redux.dart';
-import 'package:background_fetch/background_fetch.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'package:sri_kamakoti/logic/actions.dart';
 import 'package:sri_kamakoti/models/app_state.dart';
+import 'package:sri_kamakoti/models/notification_channel.dart';
+import 'package:sri_kamakoti/models/notification.dart';
 import 'package:sri_kamakoti/data/post_repository.dart';
+import 'package:sri_kamakoti/helpers/background_fetch_helper.dart';
 
 middleware(Store<AppState> store, action, NextDispatcher next) {
   if (action is HomeScreenInitAction) {
@@ -15,59 +17,40 @@ middleware(Store<AppState> store, action, NextDispatcher next) {
   next(action);
 }
 
-_handleHomeScreenInit(Store<AppState> store, HomeScreenInitAction action) {
-  getPosts().then((posts) => posts.toList()).then((posts) {
-    store.dispatch(PostRetrievedAction(posts));
-  });
+_handleHomeScreenInit(
+  Store<AppState> store,
+  HomeScreenInitAction action,
+) async {
+  var posts = await PostRepository.getPosts();
+  store.dispatch(PostRetrievedAction(posts));
 }
 
-Future _showNotificationWithDefaultSound() async {
+Future _showNotification(
+    NotificationChannel channel, Notification notification) async {
   var flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-    'your channel id',
-    'your channel name',
-    'your channel description',
+    channel.id,
+    channel.name,
+    channel.description,
     importance: Importance.Max,
     priority: Priority.High,
   );
   var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+
   var platformChannelSpecifics = NotificationDetails(
-      androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    androidPlatformChannelSpecifics,
+    iOSPlatformChannelSpecifics,
+  );
+
   await flutterLocalNotificationsPlugin.show(
-    0,
-    'New Post',
-    'How to Show Notification in Flutter',
+    notification.id,
+    notification.title,
+    notification.description,
     platformChannelSpecifics,
-    payload: 'Default_Sound',
+    payload: notification.payload,
   );
 }
 
-// This "Headless Task" is run when android app is terminated.
-void backgroundFetchCallback() async {
-  print('[BackgroundFetch] Headless event received.');
-  _showNotificationWithDefaultSound();
-
-//  var posts = await recentPosts();
-//  print(posts);
-
-  BackgroundFetch.finish();
-}
-
 _handleAppInit(store, action) {
-  _showNotificationWithDefaultSound();
-  // Register to receive BackgroundFetch events after app is terminated.
-  // Requires {stopOnTerminate: false, enableHeadless: true}
-  BackgroundFetch.registerHeadlessTask(backgroundFetchCallback);
-
-  var config = BackgroundFetchConfig(
-      minimumFetchInterval: 15,
-      stopOnTerminate: false,
-      enableHeadless: true,
-      forceReload: false);
-
-  BackgroundFetch.configure(config, backgroundFetchCallback).then((int status) {
-    print('[BackgroundFetch] SUCCESS: $status');
-  }).catchError((e) {
-    print('[BackgroundFetch] ERROR: $e');
-  });
+  BackgroundFetchHelper.configureBackgroundFetch(store);
 }
