@@ -1,5 +1,5 @@
 class AppConstants {
   AppConstants._();
 
-  static const int backgroundInterval = 15; // minutes
+  static const int backgroundFetchInterval = 15; // minutes
 }

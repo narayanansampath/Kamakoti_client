@@ -1,6 +1,7 @@
 import 'package:sri_kamakoti/constants/strings.dart';
 import 'package:sri_kamakoti/models/notification_channel.dart';
 
+/// Contains all the notification channels for the Android app
 class NotificationChannels {
   NotificationChannels._();
 

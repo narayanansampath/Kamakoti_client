@@ -8,8 +8,10 @@ Store<AppState> _store;
 
 // background_fetch requires a global level function
 void _onFetch() async {
-  print("Im Here");
   _store.dispatch(BackgroundFetchAction());
+
+  // TODO: call finish once the work is done
+//  BackgroundFetch.finish();
 }
 
 class BackgroundFetchHelper {
@@ -22,7 +24,7 @@ class BackgroundFetchHelper {
     BackgroundFetch.registerHeadlessTask(_onFetch);
 
     var config = BackgroundFetchConfig(
-      minimumFetchInterval: AppConstants.backgroundInterval,
+      minimumFetchInterval: AppConstants.backgroundFetchInterval,
       stopOnTerminate: false,
       enableHeadless: true,
       forceReload: false,

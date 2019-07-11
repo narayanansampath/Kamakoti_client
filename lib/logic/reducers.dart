@@ -1,4 +1,4 @@
-import 'package:sri_kamakoti/logic/actions.dart';
+import 'package:sri_kamakoti/actions/post_actions.dart';
 import 'package:sri_kamakoti/models/app_state.dart';
 
 
