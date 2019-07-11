@@ -4,17 +4,22 @@ import 'package:sri_kamakoti/models/app_state.dart';
 import 'package:sri_kamakoti/constants/app_constants.dart';
 import 'package:sri_kamakoti/actions/background_fetch_actions.dart';
 
+Store<AppState> _store;
+
+// background_fetch requires a global level function
+void _onFetch() async {
+  print("Im Here");
+  _store.dispatch(BackgroundFetchAction());
+}
+
 class BackgroundFetchHelper {
   BackgroundFetchHelper._();
 
-  static void _onFetch(store) {
-    store.dispatch(BackgroundFetchAction());
-  }
-
   static void configureBackgroundFetch(Store<AppState> store) {
+    _store = store;
     // Register to receive BackgroundFetch events after app is terminated.
     // Requires {stopOnTerminate: false, enableHeadless: true}
-    BackgroundFetch.registerHeadlessTask(() => _onFetch(store));
+    BackgroundFetch.registerHeadlessTask(_onFetch);
 
     var config = BackgroundFetchConfig(
       minimumFetchInterval: AppConstants.backgroundInterval,
@@ -23,7 +28,7 @@ class BackgroundFetchHelper {
       forceReload: false,
     );
 
-    BackgroundFetch.configure(config, () => _onFetch(store))
+    BackgroundFetch.configure(config, _onFetch)
         .then((status) => store.dispatch(OnBackgroundFetchSuccess(status)))
         .catchError((e) => store.dispatch(OnBackgroundFetchError(e)));
   }

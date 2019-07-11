@@ -52,7 +52,7 @@ class LocalNotificationHelper {
     await flutterLocalNotificationsPlugin.show(
       notification.id,
       notification.title,
-      notification.description,
+      notification.description ?? "", // app crashes in iOS if null
       platformChannelSpecifics,
       payload: notification.payload,
     );
