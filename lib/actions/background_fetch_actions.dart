@@ -11,3 +11,5 @@ class OnBackgroundFetchError {
 
   OnBackgroundFetchError(this.error);
 }
+
+class FinishBackgroundFetchAction {}

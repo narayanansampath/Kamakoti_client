@@ -22,6 +22,8 @@ middleware(Store<AppState> store, action, NextDispatcher next) {
     _handleShowNotification(store, action);
   } else if (action is OnSelectNotification) {
     _handleOnSelectNotification(store, action);
+  } else if (action is FinishBackgroundFetchAction) {
+    _handleFinishBackgroundFetch(store, action);
   }
   next(action);
 }
@@ -41,7 +43,7 @@ _handleHomeScreenInit(
 
 _handleBackgroundFetch(Store<AppState> store, action) async {
   var posts = await PostRepository().getRecentPosts();
-  print(posts);
+
   if (posts.length <= 0) return;
 
   posts.forEach((p) {
@@ -56,14 +58,25 @@ _handleBackgroundFetch(Store<AppState> store, action) async {
       notification,
     );
     store.dispatch(notificationAction);
+
+    // since we don't know when the notifications are displayed
+    // mark that the background is finished after a arbitrary time
+    Future.delayed(
+      Duration(seconds: 1),
+      () => store.dispatch(FinishBackgroundFetchAction()),
+    );
   });
 }
 
-_handleShowNotification(store, ShowNotificationAction action) {
-  LocalNotificationHelper().showNotification(
+_handleShowNotification(store, ShowNotificationAction action) async {
+  await LocalNotificationHelper().showNotification(
     action.channel,
     action.notification,
   );
+}
+
+_handleFinishBackgroundFetch(store, action) {
+  BackgroundFetchHelper.finishBackgroundFetch();
 }
 
 // TODO: implement

@@ -34,4 +34,8 @@ class BackgroundFetchHelper {
         .then((status) => store.dispatch(OnBackgroundFetchSuccess(status)))
         .catchError((e) => store.dispatch(OnBackgroundFetchError(e)));
   }
+
+  static void finishBackgroundFetch() {
+    BackgroundFetch.finish();
+  }
 }
