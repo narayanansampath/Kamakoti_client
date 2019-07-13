@@ -7,7 +7,7 @@ import 'package:sri_kamakoti/actions/actions.dart';
 class Snacker extends StatelessWidget {
   final Widget child;
 
-  Snacker(this.child);
+  Snacker({this.child});
 
   @override
   Widget build(BuildContext context) {

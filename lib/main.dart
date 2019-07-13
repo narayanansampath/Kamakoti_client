@@ -7,7 +7,7 @@ import 'models/app_state.dart';
 import 'package:sri_kamakoti/actions/actions.dart';
 import 'package:sri_kamakoti/reducers/reducers.dart';
 import 'package:sri_kamakoti/middlewates/middlewares.dart';
-import 'package:sri_kamakoti/ui/home/home_screen.dart';
+import 'package:sri_kamakoti/ui/screens//home_screen.dart';
 import 'package:sri_kamakoti/constants/colors.dart';
 import 'package:sri_kamakoti/constants/strings.dart';
 
