@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-
 import 'package:sri_kamakoti/models/post.dart';
 
 class PostItem extends StatelessWidget {
   final Post post;
-  final height = 250.0;
+  final Function onTap;
+  final height = 200.0;
   final gradientHeight = 150.0;
 
-  PostItem(this.post);
+  PostItem(this.post, this.onTap);
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +59,15 @@ class PostItem extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: renderTexts(),
           ),
+          Positioned.fill(
+            child: new Material(
+              color: Colors.transparent,
+              child: new InkWell(
+                splashColor: Color.fromRGBO(255, 255, 255, 0.3),
+                onTap: onTap,
+              ),
+            ),
+          )
         ],
       ),
     );

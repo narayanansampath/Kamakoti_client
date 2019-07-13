@@ -16,7 +16,7 @@ class Endpoints {
       }
     } else {
       // TODO: return actual api
-      return "http://www.example.com/";
+      return "https://srikamakoti.herokuapp.com/v1/";
     }
   }
 

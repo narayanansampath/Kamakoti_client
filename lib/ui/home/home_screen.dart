@@ -3,7 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:sri_kamakoti/actions/actions.dart';
 import 'package:sri_kamakoti/models/app_state.dart';
 import 'package:sri_kamakoti/models/post.dart';
-import 'package:sri_kamakoti/ui/home/widgets/post_item.dart';
+import 'package:sri_kamakoti/ui/containers/post_list.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -39,16 +39,12 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       builder: (context, HomePageViewModel vm) {
         return Scaffold(
-            appBar: AppBar(
-              title: Center(child: Text('Sri Kamakoti')),
-            ),
-            body: ListView.builder(
-              itemCount: vm.posts.length,
-              itemBuilder: (context, index) {
-                return PostItem(vm.posts[index]);
-              },
-            ),
-            bottomNavigationBar: renderBottomNavigationBar());
+          appBar: AppBar(
+            title: Center(child: Text('Sri Kamakoti')),
+          ),
+          body: PostList(),
+          bottomNavigationBar: renderBottomNavigationBar(),
+        );
       },
     );
   }

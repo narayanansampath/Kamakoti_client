@@ -9,9 +9,6 @@ Store<AppState> _store;
 // background_fetch requires a global level function
 void _onFetch() async {
   _store.dispatch(BackgroundFetchAction());
-
-  // TODO: call finish once the work is done
-//  BackgroundFetch.finish();
 }
 
 class BackgroundFetchHelper {
