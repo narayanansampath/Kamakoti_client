@@ -11,7 +11,10 @@ AppState reducer(AppState state, dynamic action) {
 HomeScreenState _reduceHomeScreenState(AppState state, action) {
   HomeScreenState homeScreenState = state.homeScreenState;
   if (action is PostRetrievedAction) {
-    homeScreenState = homeScreenState.copyWith(loading: false, posts: action.posts);
+    homeScreenState = homeScreenState.copyWith(
+      loading: false,
+      posts: action.posts,
+    );
   }
   return homeScreenState;
 }

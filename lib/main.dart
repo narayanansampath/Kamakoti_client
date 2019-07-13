@@ -11,18 +11,6 @@ import 'package:sri_kamakoti/ui/home/home_screen.dart';
 import 'package:sri_kamakoti/constants/colors.dart';
 import 'package:sri_kamakoti/constants/strings.dart';
 
-Future onDidReceiveLocalNotification(
-  int id,
-  String title,
-  String body,
-  String payload,
-) async {
-  print(id);
-  print(body);
-  print(payload);
-  print(title);
-}
-
 void main() {
   runApp(App());
 }
@@ -41,18 +29,6 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  Future onSelectNotification(String payload) async {
-    showDialog(
-      context: context,
-      builder: (_) {
-        return AlertDialog(
-          title: Text("PayLoad"),
-          content: Text("Payload : $payload"),
-        );
-      },
-    );
-  }
-
   @override
   void initState() {
     super.initState();

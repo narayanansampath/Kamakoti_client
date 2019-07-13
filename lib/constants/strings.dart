@@ -10,4 +10,7 @@ class Strings {
 
   // Notification strings
   static const latest_post = "Latest Post";
+
+  // Error messages
+  static const url_open_err_msg = "Unable to open the URL";
 }

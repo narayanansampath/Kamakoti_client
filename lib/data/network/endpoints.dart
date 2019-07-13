@@ -11,7 +11,7 @@ class Endpoints {
       if (defaultTargetPlatform == TargetPlatform.iOS) {
         return "http://localhost:8000/v1/";
       } else {
-//      return "http://192.168.43.84:8000/v1/";
+//      return "http://192.168.1.5:8000/v1/";
         return "http://10.0.2.2:8000/v1/";
       }
     } else {

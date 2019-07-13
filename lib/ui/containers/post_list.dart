@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:sri_kamakoti/models/app_state.dart';
 import 'package:sri_kamakoti/models/post.dart';
+import 'package:sri_kamakoti/actions/actions.dart';
 import 'package:sri_kamakoti/ui/components/post_item.dart';
 
 class PostList extends StatelessWidget {
@@ -18,20 +18,7 @@ class PostList extends StatelessWidget {
             var post = vm.posts[index];
             return PostItem(
               post,
-              () {
-                launch(
-                  post.url,
-                  option: CustomTabsOption(
-                    toolbarColor: Theme.of(context).primaryColor,
-                    enableDefaultShare: true,
-                    enableUrlBarHiding: true,
-                    showPageTitle: true,
-                    animation: CustomTabsAnimation(
-                        startEnter: 'slide_up',
-                        endEnter: 'slide_down'),
-                  ),
-                );
-              },
+              () => vm.onTap(post),
             );
           },
         );
@@ -42,10 +29,15 @@ class PostList extends StatelessWidget {
 
 class _ViewModel {
   final List<Post> posts;
+  final Function(Post) onTap;
 
-  _ViewModel({this.posts});
+  _ViewModel({this.posts, this.onTap});
 
   static _ViewModel fromStore(Store<AppState> store) {
-    return _ViewModel(posts: store.state.homeScreenState.posts);
+    return _ViewModel(
+        posts: store.state.homeScreenState.posts,
+        onTap: (post) {
+          store.dispatch(OpenLinkAction(title: post.title, url: post.url));
+        });
   }
 }

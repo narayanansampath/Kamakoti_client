@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
+import 'package:pk_skeleton/pk_skeleton.dart';
 import 'package:sri_kamakoti/actions/actions.dart';
 import 'package:sri_kamakoti/models/app_state.dart';
 import 'package:sri_kamakoti/models/post.dart';
@@ -32,17 +34,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, HomePageViewModel>(
-      converter: (store) {
-        var state = store.state.homeScreenState;
-        return HomePageViewModel(posts: state.posts, loading: state.loading);
-      },
-      builder: (context, HomePageViewModel vm) {
+    return StoreConnector<AppState, _HomePageViewModel>(
+      converter: (store) => _HomePageViewModel.fromStore(store),
+      builder: (context, _HomePageViewModel vm) {
         return Scaffold(
-          appBar: AppBar(
-            title: Center(child: Text('Sri Kamakoti')),
-          ),
-          body: PostList(),
+          appBar: AppBar(title: Center(child: Text('Sri Kamakoti'))),
+          body: vm.loading ? renderLoading() : PostList(),
           bottomNavigationBar: renderBottomNavigationBar(),
         );
       },
@@ -102,11 +99,26 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     );
   }
+
+  Widget renderLoading() {
+    return PKCardListSkeleton(
+      isCircularImage: false,
+      isBottomLinesActive: true,
+      length: 4,
+    );
+  }
 }
 
-class HomePageViewModel {
+class _HomePageViewModel {
   final List<Post> posts;
   final bool loading;
 
-  HomePageViewModel({this.posts, this.loading});
+  _HomePageViewModel({this.posts, this.loading});
+
+  static _HomePageViewModel fromStore(Store<AppState> store) {
+    return _HomePageViewModel(
+        posts: store.state.homeScreenState.posts,
+        loading: store.state.homeScreenState.loading
+    );
+  }
 }
