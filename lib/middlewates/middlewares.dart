@@ -42,10 +42,17 @@ _handleHomeScreenInit(
   Store<AppState> store,
   HomeScreenInitAction action,
 ) async {
-  var posts = await PostRepository().getPosts();
-  Future.delayed(Duration(seconds: 2), () {
-    store.dispatch(PostRetrievedAction(posts));
-  });
+  try {
+    var posts = await PostRepository().getPosts();
+    Future.delayed(Duration(seconds: 2), () {
+      store.dispatch(PostRetrievedAction(posts));
+    });
+  } catch (e) {
+    store.dispatch(ShowSnackAction(
+      type: "error",
+      message: Strings.fetch_posts_err_msg,
+    ));
+  }
 }
 
 _handleBackgroundFetch(Store<AppState> store, action) async {
@@ -104,6 +111,10 @@ _handleOpenLinkAction(Store<AppState> store, OpenLinkAction action) async {
     );
   } catch (e) {
     print(e);
+    store.dispatch(ShowSnackAction(
+      type: "error",
+      message: Strings.url_open_err_msg,
+    ));
   }
 }
 

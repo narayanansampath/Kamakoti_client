@@ -37,10 +37,6 @@ class HomeScreenState {
 
 @immutable
 class SnackState {
-  static const SUCCESS = "SUCCESS";
-  static const ERROR = "ERROR";
-  static const INFO = "INFO";
-
   final String message;
   final String type;
   final bool displayed;

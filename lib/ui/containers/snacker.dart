@@ -33,9 +33,9 @@ class _SnackerViewModel {
   static SnackBar getSnackBar(SnackState snackState) {
     if (snackState.displayed) return null;
 
-    var color = snackState.type == SnackState.ERROR
+    var color = snackState.type == "error"
         ? Colors.red
-        : (snackState.type == SnackState.SUCCESS ? Colors.green : null);
+        : (snackState.type == "success" ? Colors.green : null);
 
     return SnackBar(content: Text(snackState.message), backgroundColor: color);
   }

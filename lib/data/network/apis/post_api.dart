@@ -5,18 +5,14 @@ import 'package:sri_kamakoti/models/post.dart';
 import 'package:sri_kamakoti/models/api_response.dart';
 
 Future<List<Post>> getPosts() async {
-  try {
-    Response response = await Dio().get(Endpoints.getPosts);
+  Response response = await Dio().get(Endpoints.getPosts);
 
-    var responseData = ApiResponse.fromJson(response.data);
-    if (!responseData.isSuccessful) throw "Error fetching posts";
+  var responseData = ApiResponse.fromJson(response.data);
+  if (!responseData.isSuccessful) throw "Error fetching posts";
 
-    return (responseData.data as List)
-        .map((json) => Post.fromJson(json))
-        .toList();
-  } catch (e) {
-    throw e;
-  }
+  return (responseData.data as List)
+      .map((json) => Post.fromJson(json))
+      .toList();
 }
 
 Future<List<Post>> recentPosts() async {
