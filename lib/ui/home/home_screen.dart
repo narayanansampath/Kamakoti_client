@@ -6,6 +6,7 @@ import 'package:sri_kamakoti/actions/actions.dart';
 import 'package:sri_kamakoti/models/app_state.dart';
 import 'package:sri_kamakoti/models/post.dart';
 import 'package:sri_kamakoti/ui/containers/post_list.dart';
+import 'package:sri_kamakoti/ui/containers/snacker.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -39,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context, _HomePageViewModel vm) {
         return Scaffold(
           appBar: AppBar(title: Center(child: Text('Sri Kamakoti'))),
-          body: vm.loading ? renderLoading() : PostList(),
+          body: Snacker(vm.loading ? renderLoading() : PostList()),
           bottomNavigationBar: renderBottomNavigationBar(),
         );
       },
@@ -118,7 +119,6 @@ class _HomePageViewModel {
   static _HomePageViewModel fromStore(Store<AppState> store) {
     return _HomePageViewModel(
         posts: store.state.homeScreenState.posts,
-        loading: store.state.homeScreenState.loading
-    );
+        loading: store.state.homeScreenState.loading);
   }
 }

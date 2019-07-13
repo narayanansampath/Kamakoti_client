@@ -10,3 +10,12 @@ class OpenLinkAction {
 
   OpenLinkAction({this.title, this.url});
 }
+
+class ShowSnackAction {
+  final String type;
+  final String message;
+
+  ShowSnackAction({this.type, this.message});
+}
+
+class ShowSnackSuccessAction {}

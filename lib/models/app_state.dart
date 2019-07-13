@@ -4,14 +4,16 @@ import 'package:sri_kamakoti/models/post.dart';
 @immutable
 class AppState {
   final HomeScreenState homeScreenState;
+  final SnackState snackState;
 
   factory AppState.initial() {
     return AppState(
-        homeScreenState: HomeScreenState.initial()
+      homeScreenState: HomeScreenState.initial(),
+      snackState: SnackState.initial(),
     );
   }
 
-  AppState({this.homeScreenState});
+  AppState({this.homeScreenState, this.snackState});
 }
 
 @immutable
@@ -20,10 +22,7 @@ class HomeScreenState {
   final bool loading;
 
   factory HomeScreenState.initial() {
-    return HomeScreenState(
-        posts: [],
-        loading: true
-    );
+    return HomeScreenState(posts: [], loading: true);
   }
 
   HomeScreenState({this.posts, this.loading});
@@ -32,6 +31,31 @@ class HomeScreenState {
     return HomeScreenState(
       posts: posts ?? this.posts,
       loading: loading ?? this.loading,
+    );
+  }
+}
+
+@immutable
+class SnackState {
+  static const SUCCESS = "SUCCESS";
+  static const ERROR = "ERROR";
+  static const INFO = "INFO";
+
+  final String message;
+  final String type;
+  final bool displayed;
+
+  SnackState({this.message, this.type, this.displayed});
+
+  factory SnackState.initial() {
+    return SnackState(message: null, type: null, displayed: true);
+  }
+
+  SnackState copyWith({message, type, displayed}) {
+    return SnackState(
+      message: message ?? this.message,
+      type: type ?? this.type,
+      displayed: displayed ?? this.displayed,
     );
   }
 }
