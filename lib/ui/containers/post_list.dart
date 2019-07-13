@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:sri_kamakoti/actions/actions.dart';
 import 'package:sri_kamakoti/models/app_state.dart';
 import 'package:sri_kamakoti/models/post.dart';
-import 'package:sri_kamakoti/actions/actions.dart';
 import 'package:sri_kamakoti/ui/components/post_item.dart';
 
 class PostList extends StatelessWidget {
@@ -35,7 +35,7 @@ class _ViewModel {
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
-        posts: store.state.homeScreenState.posts,
+        posts: store.state.postListScreenState.posts,
         onTap: (post) {
           store.dispatch(OpenLinkAction(title: post.title, url: post.url));
         });

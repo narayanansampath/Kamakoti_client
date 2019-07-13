@@ -18,4 +18,4 @@ class ShowSnackAction {
   ShowSnackAction({this.type, this.message});
 }
 
-class ShowSnackSuccessAction {}
+class ShowSnackCompletedAction {}

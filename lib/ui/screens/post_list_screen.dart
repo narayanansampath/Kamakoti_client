@@ -41,8 +41,8 @@ class _PostListViewModel {
 
   static _PostListViewModel fromStore(Store<AppState> store) {
     return _PostListViewModel(
-      posts: store.state.homeScreenState.posts,
-      loading: store.state.homeScreenState.loading,
+      posts: store.state.postListScreenState.posts,
+      loading: store.state.postListScreenState.loading,
     );
   }
 }

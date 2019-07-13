@@ -43,7 +43,7 @@ class _SnackerViewModel {
   static _SnackerViewModel fromStore(Store<AppState> store) {
     SnackState snackState = store.state.snackState;
     return _SnackerViewModel(
-      setShowToastSuccessful: () => store.dispatch(ShowSnackSuccessAction()),
+      setShowToastSuccessful: () => store.dispatch(ShowSnackCompletedAction()),
       snackToShow: getSnackBar(snackState),
     );
   }

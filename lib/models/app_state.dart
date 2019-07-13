@@ -3,32 +3,55 @@ import 'package:sri_kamakoti/models/post.dart';
 
 @immutable
 class AppState {
-  final HomeScreenState homeScreenState;
+  final PostListScreenState postListScreenState;
   final SnackState snackState;
+  final NavigationState navigationState;
 
   factory AppState.initial() {
     return AppState(
-      homeScreenState: HomeScreenState.initial(),
+      postListScreenState: PostListScreenState.initial(),
       snackState: SnackState.initial(),
+      navigationState: NavigationState.initial(),
     );
   }
 
-  AppState({this.homeScreenState, this.snackState});
+  AppState({
+    this.postListScreenState,
+    this.snackState,
+    this.navigationState,
+  });
 }
 
 @immutable
-class HomeScreenState {
+class NavigationState {
+  final int currentIndex;
+
+  NavigationState({this.currentIndex});
+
+  factory NavigationState.initial() {
+    return NavigationState(currentIndex: 0);
+  }
+
+  NavigationState copyWith({currentIndex}) {
+    return NavigationState(
+      currentIndex: currentIndex ?? this.currentIndex,
+    );
+  }
+}
+
+@immutable
+class PostListScreenState {
   final List<Post> posts;
   final bool loading;
 
-  factory HomeScreenState.initial() {
-    return HomeScreenState(posts: [], loading: true);
+  factory PostListScreenState.initial() {
+    return PostListScreenState(posts: [], loading: true);
   }
 
-  HomeScreenState({this.posts, this.loading});
+  PostListScreenState({this.posts, this.loading});
 
-  HomeScreenState copyWith({posts, loading}) {
-    return HomeScreenState(
+  PostListScreenState copyWith({posts, loading}) {
+    return PostListScreenState(
       posts: posts ?? this.posts,
       loading: loading ?? this.loading,
     );
