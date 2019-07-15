@@ -13,15 +13,15 @@ class BottomNavBar extends StatelessWidget {
         return BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(Icons.import_contacts),
               title: Text('Posts'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.business),
+              icon: Icon(Icons.info_outline),
               title: Text('About'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.school),
+              icon: Icon(Icons.phone),
               title: Text('Contact'),
             ),
           ],

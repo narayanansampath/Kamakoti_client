@@ -34,12 +34,24 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  Widget renderAppBar() {
+    return AppBar(
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Image.asset("assets/adi_shankara.png"),
+          Text('Sri Kamakoti'),
+        ],
+      ),
+    );
+  }
+
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _HomeScreenViewModel>(
       converter: (store) => _HomeScreenViewModel.fromStore(store),
       builder: (BuildContext context, _HomeScreenViewModel vm) {
         return Scaffold(
-          appBar: AppBar(title: Center(child: Text('Sri Kamakoti'))),
+          appBar: renderAppBar(),
           body: Snacker(
             child: widgets.elementAt(vm.currentIndex),
           ),
