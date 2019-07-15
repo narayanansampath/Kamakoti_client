@@ -15,8 +15,8 @@ import 'package:sri_kamakoti/helpers/background_fetch_helper.dart';
 import 'package:sri_kamakoti/helpers/local_notification_helper.dart';
 
 middleware(Store<AppState> store, action, NextDispatcher next) {
-  if (action is HomeScreenInitAction) {
-    _handleHomeScreenInit(store, action);
+  if (action is FetchPostsAction) {
+    _handleFetchPosts(store, action);
   } else if (action is AppInitAction) {
     _handleAppInit(store, action);
   } else if (action is BackgroundFetchAction) {
@@ -38,20 +38,15 @@ _handleAppInit(store, action) {
   LocalNotificationHelper().configureLocalNotifications(store);
 }
 
-_handleHomeScreenInit(
+_handleFetchPosts(
   Store<AppState> store,
-  HomeScreenInitAction action,
+  FetchPostsAction action,
 ) async {
   try {
     var posts = await PostRepository().getPosts();
-    Future.delayed(Duration(seconds: 2), () {
-      store.dispatch(PostRetrievedAction(posts));
-    });
+    store.dispatch(FetchPostsSuccessAction(posts));
   } catch (e) {
-    store.dispatch(ShowSnackAction(
-      type: "error",
-      message: Strings.fetch_posts_err_msg,
-    ));
+    store.dispatch(FetchPostsErrorAction());
   }
 }
 

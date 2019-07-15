@@ -43,18 +43,19 @@ class NavigationState {
 class PostListScreenState {
   final List<Post> posts;
   final bool loading;
+  final bool error;
 
   factory PostListScreenState.initial() {
-    return PostListScreenState(posts: [], loading: true);
+    return PostListScreenState(posts: [], loading: true, error: false);
   }
 
-  PostListScreenState({this.posts, this.loading});
+  PostListScreenState({this.posts, this.loading, this.error});
 
-  PostListScreenState copyWith({posts, loading}) {
+  PostListScreenState copyWith({posts, loading, error}) {
     return PostListScreenState(
-      posts: posts ?? this.posts,
-      loading: loading ?? this.loading,
-    );
+        posts: posts ?? this.posts,
+        loading: loading ?? this.loading,
+        error: error ?? this.error);
   }
 }
 

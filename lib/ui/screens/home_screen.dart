@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux/src/store.dart';
-
-import 'package:sri_kamakoti/actions/actions.dart';
+import 'package:redux/redux.dart';
+import 'package:sri_kamakoti/actions/post_actions.dart';
 import 'package:sri_kamakoti/models/app_state.dart';
 import 'package:sri_kamakoti/ui/containers/snacker.dart';
 import 'package:sri_kamakoti/ui/containers/bottom_nav_bar.dart';
@@ -30,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // accessing inherited widget before initState finishes throw
     // exception so delay it.
     Future.delayed(Duration(milliseconds: 100), () {
-      StoreProvider.of<AppState>(context).dispatch(HomeScreenInitAction());
+      StoreProvider.of<AppState>(context).dispatch(FetchPostsAction());
     });
   }
 

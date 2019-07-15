@@ -1,7 +1,11 @@
 import 'package:sri_kamakoti/models/post.dart';
 
-class PostRetrievedAction {
+class FetchPostsAction {}
+
+class FetchPostsSuccessAction {
   final List<Post> posts;
 
-  PostRetrievedAction(this.posts);
+  FetchPostsSuccessAction(this.posts);
 }
+
+class FetchPostsErrorAction {}
