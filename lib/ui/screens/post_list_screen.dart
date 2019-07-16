@@ -27,7 +27,7 @@ class _PostListScreenState extends State<PostListScreen> {
         if (vm.loading) {
           return renderLoadingSkeleton();
         }
-        return vm.loading ? renderLoadingSkeleton() : PostList();
+        return PostList();
       },
     );
   }
