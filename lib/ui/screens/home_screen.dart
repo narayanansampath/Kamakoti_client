@@ -5,6 +5,7 @@ import 'package:sri_kamakoti/actions/post_actions.dart';
 import 'package:sri_kamakoti/models/app_state.dart';
 import 'package:sri_kamakoti/ui/containers/snacker.dart';
 import 'package:sri_kamakoti/ui/containers/bottom_nav_bar.dart';
+import 'package:sri_kamakoti/ui/screens/links_screen.dart';
 import 'package:sri_kamakoti/ui/screens/post_list_screen.dart';
 import 'package:sri_kamakoti/ui/screens/about_screen.dart';
 import 'package:sri_kamakoti/ui/screens/contact_screen.dart';
@@ -19,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<Widget> widgets = <Widget>[
     PostListScreen(),
+    LinksScreen(),
     AboutScreen(),
     ContactScreen()
   ];
@@ -38,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Image.asset("assets/adi_shankara.png"),
+          Image.asset("assets/images/adi_shankara.png"),
           Text('Sri Kamakoti'),
         ],
       ),

@@ -17,6 +17,10 @@ class BottomNavBar extends StatelessWidget {
               title: Text('Posts'),
             ),
             BottomNavigationBarItem(
+              icon: Icon(Icons.link),
+              title: Text('Links'),
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Icons.info_outline),
               title: Text('About'),
             ),

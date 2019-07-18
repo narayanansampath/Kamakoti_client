@@ -1,3 +1,5 @@
+import 'package:sri_kamakoti/util.dart';
+
 class Post {
   int id;
   String title;
@@ -23,7 +25,7 @@ class Post {
     caption = json['caption'];
     image = json['image'];
     url = json['url'];
-    createdAt = DateTime.parse(json['created_at']);
-    updatedAt = DateTime.parse(json['updated_at']);
+    createdAt = parseDate(json['created_at']);
+    updatedAt = parseDate(json['updated_at']);
   }
 }

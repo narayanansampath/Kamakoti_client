@@ -48,7 +48,7 @@ class PostItem extends StatelessWidget {
             bottom: 0,
             width: MediaQuery.of(context).size.width,
             child: Image.asset(
-              "assets/black_gradient.png",
+              "assets/images/black_gradient.png",
               height: gradientHeight,
               width: double.maxFinite,
               fit: BoxFit.fill,

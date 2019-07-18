@@ -28,6 +28,6 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/food.jpg
-    - assets/black_gradient.png
-    - assets/adi_shankara.png
+    - assets/related_links.json
+    - assets/images/black_gradient.png
+    - assets/images/adi_shankara.png
