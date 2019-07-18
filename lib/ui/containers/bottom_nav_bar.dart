@@ -29,6 +29,8 @@ class BottomNavBar extends StatelessWidget {
               title: Text('Contact'),
             ),
           ],
+          unselectedItemColor: Colors.grey,
+          showUnselectedLabels: true,
           currentIndex: vm.index,
           selectedItemColor: Theme.of(context).primaryColor,
           onTap: vm.onTapNewRoute,
