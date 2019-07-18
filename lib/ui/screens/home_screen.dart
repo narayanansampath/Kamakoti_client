@@ -8,6 +8,7 @@ import 'package:sri_kamakoti/ui/containers/bottom_nav_bar.dart';
 import 'package:sri_kamakoti/ui/screens/post_list_screen.dart';
 import 'package:sri_kamakoti/ui/screens/about_screen.dart';
 import 'package:sri_kamakoti/ui/screens/contact_screen.dart';
+import 'package:sri_kamakoti/constants/colors.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -35,11 +36,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget renderAppBar() {
     return AppBar(
+      elevation: 0.0,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Image.asset("assets/adi_shankara.png"),
-          Text('Sri Kamakoti'),
+          Text('Sri Kamakoti',
+            style: TextStyle(fontFamily: 'GothamRoundedLight', fontWeight: FontWeight.w600, color: Colors.white),),
         ],
       ),
     );
@@ -50,7 +53,8 @@ class _HomeScreenState extends State<HomeScreen> {
       converter: (store) => _HomeScreenViewModel.fromStore(store),
       builder: (BuildContext context, _HomeScreenViewModel vm) {
         return Scaffold(
-          appBar: renderAppBar(),
+          backgroundColor: kaviColor,
+          //appBar: renderAppBar(),
           body: Snacker(
             child: widgets.elementAt(vm.currentIndex),
           ),

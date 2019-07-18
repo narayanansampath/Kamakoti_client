@@ -10,6 +10,7 @@ import 'package:sri_kamakoti/middlewates/middlewares.dart';
 import 'package:sri_kamakoti/ui/screens//home_screen.dart';
 import 'package:sri_kamakoti/constants/colors.dart';
 import 'package:sri_kamakoti/constants/strings.dart';
+import 'package:sri_kamakoti/constants/theme.dart';
 
 void main() {
   runApp(App());
@@ -43,6 +44,7 @@ class _AppState extends State<App> {
         theme: ThemeData(
             brightness: Brightness.light,
             primarySwatch: kaviColor,
+            textTheme: textTheme,
             accentColor: Color(0xfffe9322)),
         title: Strings.appName,
         home: HomeScreen(),
