@@ -2,21 +2,39 @@ PODS:
   - background_fetch (0.1.1):
     - Flutter
   - Flutter (1.0.0)
+  - flutter_custom_tabs (0.0.1):
+    - Flutter
+  - flutter_local_notifications (0.0.1):
+    - Flutter
+  - url_launcher (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - background_fetch (from `.symlinks/plugins/background_fetch/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
+  - flutter_custom_tabs (from `.symlinks/plugins/flutter_custom_tabs/ios`)
+  - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
+  - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
 
 EXTERNAL SOURCES:
   background_fetch:
     :path: ".symlinks/plugins/background_fetch/ios"
   Flutter:
     :path: ".symlinks/flutter/ios"
+  flutter_custom_tabs:
+    :path: ".symlinks/plugins/flutter_custom_tabs/ios"
+  flutter_local_notifications:
+    :path: ".symlinks/plugins/flutter_local_notifications/ios"
+  url_launcher:
+    :path: ".symlinks/plugins/url_launcher/ios"
 
 SPEC CHECKSUMS:
-  background_fetch: 385552e57d3bde2c7a3abd6b1edc76b87823b6c4
-  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
+  background_fetch: 48bc814e7f731763322f4cfc2088407f4e03082d
+  Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+  flutter_custom_tabs: 8dcb85ffe874ee8fd8139bb3960743efeaf521ee
+  flutter_local_notifications: 696a74904e0a0ab754e27a5f761da4a7f9153710
+  url_launcher: 92b89c1029a0373879933c21642958c874539095
 
 PODFILE CHECKSUM: aff02bfeed411c636180d6812254b2daeea14d09
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.5.3

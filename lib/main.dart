@@ -2,71 +2,51 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_logging/redux_logging.dart';
-import 'package:http/http.dart' as http;
 
-import 'package:sri_kamakoti/logic/reducers.dart';
-import 'package:sri_kamakoti/logic/middlewares.dart';
-import 'package:sri_kamakoti/models/app_state.dart';
-import 'package:sri_kamakoti/screens/home_screen.dart';
-import 'package:background_fetch/background_fetch.dart';
-
-const EVENTS_KEY = "fetch_events";
-
-/// This "Headless Task" is run when app is terminated.
-void backgroundFetchHeadlessTask() async {
-  print('[BackgroundFetch] Headless event received.');
-
-  var apiUrl =
-      "https://us-central1-srikamakoti-822a3.cloudfunctions.net/addMessage?text=" +
-          DateTime.now().toString();
-  await http.get(apiUrl);
-
-  BackgroundFetch.finish();
-}
+import 'models/app_state.dart';
+import 'package:sri_kamakoti/actions/actions.dart';
+import 'package:sri_kamakoti/reducers/reducers.dart';
+import 'package:sri_kamakoti/middlewates/middlewares.dart';
+import 'package:sri_kamakoti/ui/screens//home_screen.dart';
+import 'package:sri_kamakoti/constants/colors.dart';
+import 'package:sri_kamakoti/constants/strings.dart';
+import 'package:sri_kamakoti/constants/theme.dart';
 
 void main() {
   runApp(App());
-
-  // Register to receive BackgroundFetch events after app is terminated.
-  // Requires {stopOnTerminate: false, enableHeadless: true}
-  BackgroundFetch.registerHeadlessTask(backgroundFetchHeadlessTask);
 }
 
-class App extends StatelessWidget {
-  final appName = 'Sri Kamakoti';
-
+class App extends StatefulWidget {
   final store = Store<AppState>(
-    (state, action) {
-      return reducer(state, action);
-    },
+    reducer,
     initialState: AppState.initial(),
     middleware: [middleware, LoggingMiddleware.printer()],
   );
 
   @override
-  Widget build(BuildContext context) {
-    BackgroundFetch.configure(
-            BackgroundFetchConfig(
-                minimumFetchInterval: 15,
-                stopOnTerminate: false,
-                enableHeadless: true,
-                forceReload: false),
-            backgroundFetchHeadlessTask)
-        .then((int status) {
-      print('[BackgroundFetch] SUCCESS: $status');
-    }).catchError((e) {
-      print('[BackgroundFetch] ERROR: $e');
-    });
+  State<StatefulWidget> createState() {
+    return _AppState();
+  }
+}
 
+class _AppState extends State<App> {
+  @override
+  void initState() {
+    super.initState();
+    widget.store.dispatch(AppInitAction());
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return StoreProvider<AppState>(
-      store: store,
+      store: widget.store,
       child: MaterialApp(
         theme: ThemeData(
             brightness: Brightness.light,
-            primarySwatch: Colors.deepOrange,
-            accentColor: Colors.deepOrangeAccent
-        ),
-        title: appName,
+            primarySwatch: kaviColor,
+            textTheme: textTheme,
+            accentColor: Color(0xfffe9322)),
+        title: Strings.appName,
         home: HomeScreen(),
       ),
     );
