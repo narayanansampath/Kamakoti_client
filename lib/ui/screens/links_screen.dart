@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:redux/redux.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 
+import 'package:sri_kamakoti/actions/actions.dart';
+import 'package:sri_kamakoti/models/app_state.dart';
 import 'package:sri_kamakoti/models/post.dart';
 import 'package:sri_kamakoti/data/links_repository.dart';
 import 'package:sri_kamakoti/ui/components/link_item.dart';
 
 class LinksScreen extends StatefulWidget {
-
   @override
   State createState() {
     return LinksScreenState();
   }
-
 }
 
 class LinksScreenState extends State<LinksScreen> {
@@ -18,6 +20,7 @@ class LinksScreenState extends State<LinksScreen> {
 
   void loadLinks() async {
     var links = await LinkRepository().getLinks();
+    // should handle via redux
     this.setState(() {
       this.links = links;
     });
@@ -31,11 +34,29 @@ class LinksScreenState extends State<LinksScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: links == null ? 0 : links.length,
-      itemBuilder: (context, index) {
-        return LinkItem(links[index], null);
+    return StoreConnector<AppState, _LinksScreenViewModel>(
+      converter: (store) => _LinksScreenViewModel.fromStore(store),
+      builder: (context, vm) {
+        return ListView.builder(
+          itemCount: links == null ? 0 : links.length,
+          itemBuilder: (context, index) {
+            var link = links[index];
+            return LinkItem(link, () => vm.onTap(link.url));
+          },
+        );
       },
     );
+  }
+}
+
+class _LinksScreenViewModel {
+  final Function(String) onTap;
+
+  _LinksScreenViewModel({this.onTap});
+
+  static fromStore(Store<AppState> store) {
+    return _LinksScreenViewModel(onTap: (String url) {
+      store.dispatch(OpenLinkAction(url: url, title: ""));
+    });
   }
 }

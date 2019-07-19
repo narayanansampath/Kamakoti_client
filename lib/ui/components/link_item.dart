@@ -11,7 +11,7 @@ class LinkItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         width: 100,
         child: Card(
