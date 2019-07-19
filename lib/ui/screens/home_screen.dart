@@ -11,7 +11,6 @@ import 'package:sri_kamakoti/ui/screens/about_screen.dart';
 import 'package:sri_kamakoti/ui/screens/contact_screen.dart';
 import 'package:sri_kamakoti/ui/screens/links_screen.dart';
 
-
 class HomeScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -37,33 +36,16 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Widget renderAppBar() {
-    return AppBar(
-      elevation: 0.0,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Image.asset("assets/images/adi_shankara.png"),
-          Text('Sri Kamakoti',
-            style: TextStyle(fontFamily: 'GothamRoundedLight',
-                fontWeight: FontWeight.w600,
-                color: Colors.white),),
-        ],
-      ),
-    );
-  }
-
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _HomeScreenViewModel>(
       converter: (store) => _HomeScreenViewModel.fromStore(store),
       builder: (BuildContext context, _HomeScreenViewModel vm) {
         return Scaffold(
           backgroundColor: kaviColor,
-          //appBar: renderAppBar(),
-        body: Snacker(
-        child: widgets.elementAt(vm.currentIndex),
-        ),
-        bottomNavigationBar: BottomNavBar(),
+          body: Snacker(
+            child: widgets.elementAt(vm.currentIndex),
+          ),
+          bottomNavigationBar: BottomNavBar(),
         );
       },
     );

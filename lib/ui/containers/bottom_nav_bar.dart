@@ -6,7 +6,7 @@ import 'package:sri_kamakoti/models/app_state.dart';
 import 'package:sri_kamakoti/constants/colors.dart';
 
 class BottomNavBar extends StatelessWidget {
-  var backgroundColor = kaviColor;
+  final backgroundColor = kaviColor;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +34,8 @@ class BottomNavBar extends StatelessWidget {
                 title: Text('Contact'),
                 backgroundColor: backgroundColor),
           ],
+          unselectedItemColor: Colors.grey[100],
+          showUnselectedLabels: true,
           currentIndex: vm.index,
           selectedItemColor: Colors.white,
           onTap: vm.onTapNewRoute,

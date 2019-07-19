@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sri_kamakoti/constants/colors.dart';
+import 'package:sri_kamakoti/ui/components/cool_title.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactScreen extends StatefulWidget {
@@ -13,38 +14,14 @@ class _ContactScreenState extends State<ContactScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: null,
+      appBar: AppBar(
+        title: CoolTitle("CONTACT US"),
+        elevation: 0,
+      ),
       backgroundColor: kaviColor,
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                    margin: EdgeInsets.fromLTRB(0, 25, 0, 0),
-                    child: Text(
-                      'CONTACT  ',
-                      style: TextStyle(
-                          fontFamily: 'GothamRounded',
-                          fontSize: 25,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.white),
-                      textAlign: TextAlign.center,
-                    )),
-                Container(
-                    margin: EdgeInsets.fromLTRB(0, 25, 0, 0),
-                    child: Text(
-                      'US',
-                      style: TextStyle(
-                          fontFamily: 'GothamRoundedLight',
-                          fontSize: 25,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white),
-                      textAlign: TextAlign.center,
-                    )),
-              ],
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[

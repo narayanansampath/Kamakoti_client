@@ -44,8 +44,6 @@ flutter:
     - assets/related_links.json
     - assets/images/black_gradient.png
     - assets/images/adi_shankara.png
-    - assets/black_gradient.png
-    - assets/adi_shankara.png
-    - assets/home_Devi.jpg
-    - assets/home_HH_Rare.jpg
+    - assets/images/home_Devi.jpg
+    - assets/images/home_HH_Rare.jpg
     - assets/about_us.txt

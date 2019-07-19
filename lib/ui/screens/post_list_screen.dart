@@ -6,9 +6,8 @@ import 'package:sri_kamakoti/constants/strings.dart';
 import 'package:sri_kamakoti/actions/post_actions.dart';
 import 'package:sri_kamakoti/models/app_state.dart';
 import 'package:sri_kamakoti/models/post.dart';
+import 'package:sri_kamakoti/ui/components/cool_title.dart';
 import 'package:sri_kamakoti/ui/containers/post_list.dart';
-
-
 
 class PostListScreen extends StatefulWidget {
   @override
@@ -18,22 +17,27 @@ class PostListScreen extends StatefulWidget {
 }
 
 class _PostListScreenState extends State<PostListScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _PostListViewModel>(
       converter: (store) => _PostListViewModel.fromStore(store),
       builder: (context, _PostListViewModel vm) {
-        if (vm.error) {
-          return renderError(vm);
-        }
-        if (vm.loading) {
-          return renderLoadingSkeleton();
-        }
-        return PostList();
+        return Scaffold(
+          appBar: AppBar(title: CoolTitle("POSTS")),
+          body: renderBody(vm),
+        );
       },
     );
+  }
+
+  renderBody(vm) {
+    if (vm.error) {
+      return renderError(vm);
+    }
+    if (vm.loading) {
+      return renderLoadingSkeleton();
+    }
+    return PostList();
   }
 
   Widget renderLoadingSkeleton() {
@@ -75,9 +79,10 @@ class _PostListViewModel {
 
   static _PostListViewModel fromStore(Store<AppState> store) {
     return _PostListViewModel(
-        posts: store.state.postListScreenState.posts,
-        loading: store.state.postListScreenState.loading,
-        error: store.state.postListScreenState.error,
-        fetchPosts: () => store.dispatch(FetchPostsAction()));
+      posts: store.state.postListScreenState.posts,
+      loading: store.state.postListScreenState.loading,
+      error: store.state.postListScreenState.error,
+      fetchPosts: () => store.dispatch(FetchPostsAction()),
+    );
   }
 }

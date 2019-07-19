@@ -1,6 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+
+import 'package:sri_kamakoti/ui/components/cool_title.dart';
 import 'package:sri_kamakoti/constants/colors.dart';
 
 class AboutScreen extends StatefulWidget {
@@ -14,7 +14,10 @@ class _AboutScreenState extends State<AboutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: null,
+        appBar: AppBar(
+          title: CoolTitle("ABOUT US"),
+          elevation: 0,
+        ),
         backgroundColor: kaviColor,
         body: SafeArea(
           child: Column(
@@ -23,36 +26,9 @@ class _AboutScreenState extends State<AboutScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                      margin: EdgeInsets.fromLTRB(0, 25, 0, 0),
-                      child: Text(
-                        'ABOUT  ',
-                        style: TextStyle(
-                            fontFamily: 'GothamRounded',
-                            fontSize: 25,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.white),
-                        textAlign: TextAlign.center,
-                      )),
-                  Container(
-                      margin: EdgeInsets.fromLTRB(0, 25, 0, 0),
-                      child: Text(
-                        'US',
-                        style: TextStyle(
-                            fontFamily: 'GothamRoundedLight',
-                            fontSize: 25,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white),
-                        textAlign: TextAlign.center,
-                      )),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
                       margin: EdgeInsets.fromLTRB(0, 30, 0, 8),
                       child: Text(
-                        'SRI KANCHI ',
+                        'SRI KANCHI',
                         style: TextStyle(
                             fontFamily: 'GothamRounded',
                             fontSize: 20,
@@ -61,21 +37,22 @@ class _AboutScreenState extends State<AboutScreen> {
                         textAlign: TextAlign.center,
                       )),
                   Container(
-                      margin: EdgeInsets.fromLTRB(0, 30, 0, 8),
-                      child: Text(
-                        'KAMAKOTI PEETHAM',
-                        style: TextStyle(
-                            fontFamily: 'GothamRoundedLight',
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white),
-                        textAlign: TextAlign.center,
-                      )),
+                    margin: EdgeInsets.fromLTRB(0, 30, 0, 8),
+                    child: Text(
+                      'KAMAKOTI PEETHAM',
+                      style: TextStyle(
+                          fontFamily: 'GothamRoundedLight',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 ],
               ),
-              new Expanded(
+              Expanded(
                 flex: 1,
-                child: new SingleChildScrollView(
+                child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
                       Row(
@@ -86,7 +63,8 @@ class _AboutScreenState extends State<AboutScreen> {
                             child: SizedBox(
                               width: 130,
                               height: 150,
-                              child: Image.asset('assets/adi_shankara.png'),
+                              child:
+                                  Image.asset('assets/images/adi_shankara.png'),
                             ),
                           ),
                           Container(
@@ -108,12 +86,19 @@ class _AboutScreenState extends State<AboutScreen> {
                         ],
                       ),
                       FutureBuilder(
-                          future: DefaultAssetBundle.of(context)
-                              .loadString('assets/about_us.txt'),
-                          builder: (context, snapshot) {
-                            return new Text(snapshot.data ?? '',
-                                softWrap: true, style: TextStyle(fontSize: 16,fontFamily: 'GothamRoundedLight', fontWeight: FontWeight.w600),);
-                          }),
+                        future: DefaultAssetBundle.of(context)
+                            .loadString('assets/about_us.txt'),
+                        builder: (context, snapshot) {
+                          return Text(
+                            snapshot.data ?? '',
+                            softWrap: true,
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: 'GothamRoundedLight',
+                                fontWeight: FontWeight.w600),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),

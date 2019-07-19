@@ -3,9 +3,11 @@ import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
 import 'package:sri_kamakoti/actions/actions.dart';
+import 'package:sri_kamakoti/constants/colors.dart';
 import 'package:sri_kamakoti/models/app_state.dart';
 import 'package:sri_kamakoti/models/post.dart';
 import 'package:sri_kamakoti/data/links_repository.dart';
+import 'package:sri_kamakoti/ui/components/cool_title.dart';
 import 'package:sri_kamakoti/ui/components/link_item.dart';
 
 class LinksScreen extends StatefulWidget {
@@ -37,13 +39,21 @@ class LinksScreenState extends State<LinksScreen> {
     return StoreConnector<AppState, _LinksScreenViewModel>(
       converter: (store) => _LinksScreenViewModel.fromStore(store),
       builder: (context, vm) {
-        return ListView.builder(
-          itemCount: links == null ? 0 : links.length,
-          itemBuilder: (context, index) {
-            var link = links[index];
-            return LinkItem(link, () => vm.onTap(link.url));
-          },
+        return Scaffold(
+          appBar: AppBar(title: CoolTitle("RELATED LINKS"), elevation: 0),
+          backgroundColor: kaviColor,
+          body: renderList(vm),
         );
+      },
+    );
+  }
+
+  renderList(vm) {
+    return ListView.builder(
+      itemCount: links == null ? 0 : links.length,
+      itemBuilder: (context, index) {
+        var link = links[index];
+        return LinkItem(link, () => vm.onTap(link.url));
       },
     );
   }

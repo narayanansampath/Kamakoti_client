@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sri_kamakoti/constants/colors.dart';
 import 'package:sri_kamakoti/models/post.dart';
 
 class LinkItem extends StatelessWidget {
@@ -15,6 +16,7 @@ class LinkItem extends StatelessWidget {
       child: Container(
         width: 100,
         child: Card(
+          color: kaviColor[100],
           clipBehavior: Clip.antiAliasWithSaveLayer,
           child: Row(
             children: <Widget>[
