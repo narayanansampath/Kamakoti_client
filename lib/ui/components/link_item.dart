@@ -60,11 +60,17 @@ class LinkItem extends StatelessWidget {
           child: Icon(Icons.link, color: Colors.blue),
           padding: EdgeInsets.only(right: 5),
         ),
-        Text(
-          post.url,
-          style: TextStyle(
-            color: Colors.blue,
-            decoration: TextDecoration.underline,
+        new Flexible(
+          child: new Container(
+            padding: new EdgeInsets.only(right: 13.0),
+            child: new Text(
+              post.url,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: Colors.blue,
+                decoration: TextDecoration.underline,
+              ),
+            ),
           ),
         ),
       ],
