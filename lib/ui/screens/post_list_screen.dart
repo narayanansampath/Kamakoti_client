@@ -23,7 +23,7 @@ class _PostListScreenState extends State<PostListScreen> {
       converter: (store) => _PostListViewModel.fromStore(store),
       builder: (context, _PostListViewModel vm) {
         return Scaffold(
-          appBar: AppBar(title: CoolTitle("POSTS")),
+          appBar: AppBar(title: CoolTitle("SRI KAMAKOTI")),
           body: renderBody(vm),
         );
       },
@@ -60,8 +60,14 @@ class _PostListScreenState extends State<PostListScreen> {
               padding: EdgeInsets.all(10),
               child: Icon(Icons.error_outline, size: 50),
             ),
-            Text(Strings.fetch_posts_err_msg),
-            Text(Strings.tap_to_retry),
+            Text(
+              Strings.fetch_posts_err_msg,
+              style: TextStyle(color: Colors.black),
+            ),
+            Text(
+              Strings.tap_to_retry,
+              style: TextStyle(color: Colors.black),
+            ),
           ],
         ),
       ),

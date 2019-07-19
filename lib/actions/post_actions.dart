@@ -8,4 +8,6 @@ class FetchPostsSuccessAction {
   FetchPostsSuccessAction(this.posts);
 }
 
+class FetchMorePostsAction {}
+
 class FetchPostsErrorAction {}
