@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   redux: ^3.0.0
   flutter_redux: ^0.5.3
   redux_logging: ^0.3.0
@@ -26,6 +27,19 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  fonts:
+  - family: GothamRounded
+    fonts:
+    - asset: fonts/GothamRoundedBold_21016.ttf
+
+  - family: GothamRoundedLight
+    fonts:
+    - asset: fonts/GothamRoundedLight_21020.ttf
+
+  - family: GothamRoundedMedium
+    fonts:
+    - asset: fonts/GothamRoundedMedium_21022.ttf
 
   assets:
     - assets/related_links.json
