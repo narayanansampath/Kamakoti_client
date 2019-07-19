@@ -27,7 +27,25 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  fonts:
+  - family: GothamRounded
+    fonts:
+    - asset: fonts/GothamRoundedBold_21016.ttf
+
+  - family: GothamRoundedLight
+    fonts:
+    - asset: fonts/GothamRoundedLight_21020.ttf
+
+  - family: GothamRoundedMedium
+    fonts:
+    - asset: fonts/GothamRoundedMedium_21022.ttf
+
   assets:
     - assets/related_links.json
     - assets/images/black_gradient.png
     - assets/images/adi_shankara.png
+    - assets/black_gradient.png
+    - assets/adi_shankara.png
+    - assets/home_Devi.jpg
+    - assets/home_HH_Rare.jpg
+    - assets/about_us.txt

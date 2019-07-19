@@ -7,6 +7,7 @@ class Endpoints {
   Endpoints._();
 
   static String get baseUrl {
+    return "https://srikamakoti.herokuapp.com/v1/";
     if (isDebugMode) {
       if (defaultTargetPlatform == TargetPlatform.iOS) {
         return "http://localhost:8000/v1/";
@@ -15,7 +16,6 @@ class Endpoints {
 //        return "http://10.0.2.2:8000/v1/";
       }
     } else {
-      // TODO: return actual api
       return "https://srikamakoti.herokuapp.com/v1/";
     }
   }
