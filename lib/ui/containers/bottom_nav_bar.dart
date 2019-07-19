@@ -3,7 +3,6 @@ import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:sri_kamakoti/actions/navigation_actions.dart';
 import 'package:sri_kamakoti/models/app_state.dart';
-import 'package:sri_kamakoti/constants/colors.dart';
 
 class BottomNavBar extends StatelessWidget {
   @override
@@ -12,8 +11,6 @@ class BottomNavBar extends StatelessWidget {
       converter: (store) => _BottomNavBarViewModel.formStore(store),
       builder: (BuildContext context, _BottomNavBarViewModel vm) {
         return BottomNavigationBar(
-          elevation: 0.0,
-          backgroundColor: kaviColor,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.import_contacts),
@@ -35,7 +32,7 @@ class BottomNavBar extends StatelessWidget {
           unselectedItemColor: Colors.grey,
           showUnselectedLabels: true,
           currentIndex: vm.index,
-          selectedItemColor: Colors.white,
+          selectedItemColor: Theme.of(context).primaryColor,
           onTap: vm.onTapNewRoute,
         );
       },

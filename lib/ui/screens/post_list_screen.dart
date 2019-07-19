@@ -50,7 +50,7 @@ class _PostListScreenState extends State<PostListScreen> {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.all(10),
-              child: Icon(Icons.error_outline, size: 50, color: Colors.white,),
+              child: Icon(Icons.error_outline, size: 50),
             ),
             Text(Strings.fetch_posts_err_msg),
             Text(Strings.tap_to_retry),
