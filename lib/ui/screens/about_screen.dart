@@ -28,7 +28,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   Container(
                       margin: EdgeInsets.fromLTRB(0, 30, 0, 8),
                       child: Text(
-                        'SRI KANCHI',
+                        'SRI KANCHI  ',
                         style: TextStyle(
                             fontFamily: 'GothamRounded',
                             fontSize: 20,
@@ -59,7 +59,7 @@ class _AboutScreenState extends State<AboutScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Container(
-                            margin: EdgeInsets.fromLTRB(0, 25, 0, 10),
+                            margin: EdgeInsets.fromLTRB(0, 25, 0, 15),
                             child: SizedBox(
                               width: 130,
                               height: 150,
@@ -68,36 +68,41 @@ class _AboutScreenState extends State<AboutScreen> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.fromLTRB(0, 25, 0, 10),
+                            margin: EdgeInsets.fromLTRB(0, 25, 0, 15),
                             child: SizedBox(
                               width: 120,
                               height: 150,
-                              child: Image.asset('assets/home_Devi.jpg'),
+                              child: Image.asset('assets/images/home_Devi.jpg'),
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.fromLTRB(0, 25, 0, 10),
+                            margin: EdgeInsets.fromLTRB(0, 25, 0, 15),
                             child: SizedBox(
-                              width: 150,
+                              width: 120,
                               height: 150,
-                              child: Image.asset('assets/home_HH_Rare.jpg'),
+                              child: Image.asset('assets/images/home_HH_Rare.jpg',fit: BoxFit.contain,),
                             ),
                           ),
                         ],
                       ),
-                      FutureBuilder(
+                      Padding(
+                        padding: EdgeInsets.all(8),
+                        child: FutureBuilder(
                         future: DefaultAssetBundle.of(context)
                             .loadString('assets/about_us.txt'),
                         builder: (context, snapshot) {
                           return Text(
                             snapshot.data ?? '',
                             softWrap: true,
+                            textAlign: TextAlign.justify,
                             style: TextStyle(
                                 fontSize: 16,
                                 fontFamily: 'GothamRoundedLight',
-                                fontWeight: FontWeight.w600),
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white),
                           );
                         },
+                      ),
                       ),
                     ],
                   ),

@@ -3,6 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_logging/redux_logging.dart';
 
+import 'constants/theme.dart';
 import 'models/app_state.dart';
 import 'package:sri_kamakoti/actions/actions.dart';
 import 'package:sri_kamakoti/reducers/reducers.dart';
@@ -43,6 +44,7 @@ class _AppState extends State<App> {
         theme: ThemeData(
             brightness: Brightness.light,
             primarySwatch: kaviColor,
+            textTheme: textTheme,
             accentColor: Color(0xfffe9322)),
         title: Strings.appName,
         home: HomeScreen(),

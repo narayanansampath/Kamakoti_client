@@ -16,7 +16,7 @@ class LinkItem extends StatelessWidget {
       child: Container(
         width: 100,
         child: Card(
-          color: kaviColor[100],
+          color: kaviColor[300],
           clipBehavior: Clip.antiAliasWithSaveLayer,
           child: Row(
             children: <Widget>[
@@ -45,6 +45,7 @@ class LinkItem extends StatelessWidget {
             post.title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontSize: 16),
           ),
           renderLink()
         ],

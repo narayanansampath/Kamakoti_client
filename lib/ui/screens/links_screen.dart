@@ -42,7 +42,9 @@ class LinksScreenState extends State<LinksScreen> {
         return Scaffold(
           appBar: AppBar(title: CoolTitle("RELATED LINKS"), elevation: 0),
           backgroundColor: kaviColor,
-          body: renderList(vm),
+          body: SafeArea(
+            child: renderList(vm),
+          )
         );
       },
     );
