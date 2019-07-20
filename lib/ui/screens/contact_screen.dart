@@ -149,6 +149,7 @@ class _ContactScreenState extends State<ContactScreen> {
                       size: 45,
                     )),
                 Flexible(
+                  child: InkWell(
                   child: Container(
                       margin: EdgeInsets.fromLTRB(5, 35, 8, 8),
                       child: Text(
@@ -160,7 +161,35 @@ class _ContactScreenState extends State<ContactScreen> {
                             color: Colors.white),
                         textAlign: TextAlign.start,
                       )),
+                      onTap: () {
+                        launchCaller('https://www.google.com/maps/place/Sankara+Mutt/@12.8433037,79.7005264,19.4z/data=!4m5!3m4!1s0x3a52c2521d4d3893:0x35b6018f96b27cbc!8m2!3d12.843215!4d79.7006335');
+                      }),
                 )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                InkWell(
+                    child: Container(
+                        margin: EdgeInsets.fromLTRB(5, 35, 45, 8),
+                        child: SizedBox(
+                          width: 48.0, height: 48.0,
+                          child: Image.asset('assets/images/fb.png',),
+                        )),
+                    onTap: () {
+                      launchCaller('https://www.facebook.com/srikamakoti/');
+                    }),
+                InkWell(
+                    child: Container(
+                        margin: EdgeInsets.fromLTRB(45, 35, 8, 8),
+                        child: SizedBox(
+                          width: 45.0, height: 45.0,
+                          child: Image.asset('assets/images/twitter.png'),
+                        )),
+                    onTap: () {
+                      launchCaller('https://twitter.com/KanchiMatham');
+                    }),
               ],
             ),
           ],
