@@ -19,7 +19,7 @@ class _ContactScreenState extends State<ContactScreen> {
         elevation: 0,
       ),
       backgroundColor: kaviColor,
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Row(
@@ -32,17 +32,21 @@ class _ContactScreenState extends State<ContactScreen> {
                       color: Colors.white,
                       size: 45,
                     )),
-                Container(
+                Flexible(
+                  child: Container(
                     margin: EdgeInsets.fromLTRB(5, 35, 8, 8),
                     child: Text(
                       'Sri Kanchi Kamakotipeetham',
+                      overflow: TextOverflow.visible,
                       style: TextStyle(
                           fontFamily: 'GothamRoundedLight',
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
                           color: Colors.white),
                       textAlign: TextAlign.center,
-                    ))
+                    ),
+                  ),
+                )
               ],
             ),
             Row(
@@ -150,19 +154,20 @@ class _ContactScreenState extends State<ContactScreen> {
                     )),
                 Flexible(
                   child: InkWell(
-                  child: Container(
-                      margin: EdgeInsets.fromLTRB(5, 35, 8, 8),
-                      child: Text(
-                        '1, Salai Street, Kanchipuram, Tamilnadu, India, 631502',
-                        style: TextStyle(
-                            fontFamily: 'GothamRoundedLight',
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white),
-                        textAlign: TextAlign.start,
-                      )),
+                      child: Container(
+                          margin: EdgeInsets.fromLTRB(5, 35, 8, 8),
+                          child: Text(
+                            '1, Salai Street, Kanchipuram, Tamilnadu, India, 631502',
+                            style: TextStyle(
+                                fontFamily: 'GothamRoundedLight',
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white),
+                            textAlign: TextAlign.start,
+                          )),
                       onTap: () {
-                        launchCaller('https://www.google.com/maps/place/Sankara+Mutt/@12.8433037,79.7005264,19.4z/data=!4m5!3m4!1s0x3a52c2521d4d3893:0x35b6018f96b27cbc!8m2!3d12.843215!4d79.7006335');
+                        launchCaller(
+                            'https://www.google.com/maps/place/Sankara+Mutt/@12.8433037,79.7005264,19.4z/data=!4m5!3m4!1s0x3a52c2521d4d3893:0x35b6018f96b27cbc!8m2!3d12.843215!4d79.7006335');
                       }),
                 )
               ],
@@ -174,8 +179,11 @@ class _ContactScreenState extends State<ContactScreen> {
                     child: Container(
                         margin: EdgeInsets.fromLTRB(5, 35, 45, 8),
                         child: SizedBox(
-                          width: 48.0, height: 48.0,
-                          child: Image.asset('assets/images/fb.png',),
+                          width: 48.0,
+                          height: 48.0,
+                          child: Image.asset(
+                            'assets/images/fb.png',
+                          ),
                         )),
                     onTap: () {
                       launchCaller('https://www.facebook.com/srikamakoti/');
@@ -184,7 +192,8 @@ class _ContactScreenState extends State<ContactScreen> {
                     child: Container(
                         margin: EdgeInsets.fromLTRB(45, 35, 8, 8),
                         child: SizedBox(
-                          width: 45.0, height: 45.0,
+                          width: 45.0,
+                          height: 45.0,
                           child: Image.asset('assets/images/twitter.png'),
                         )),
                     onTap: () {

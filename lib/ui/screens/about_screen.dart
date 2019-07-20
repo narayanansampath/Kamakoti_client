@@ -28,7 +28,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   Container(
                       margin: EdgeInsets.fromLTRB(0, 30, 0, 8),
                       child: Text(
-                        'SRI KANCHI  ',
+                        'SRI KANCHI ',
                         style: TextStyle(
                             fontFamily: 'GothamRounded',
                             fontSize: 20,
@@ -36,16 +36,19 @@ class _AboutScreenState extends State<AboutScreen> {
                             color: Colors.white),
                         textAlign: TextAlign.center,
                       )),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 30, 0, 8),
-                    child: Text(
-                      'KAMAKOTI PEETHAM',
-                      style: TextStyle(
-                          fontFamily: 'GothamRoundedLight',
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
-                      textAlign: TextAlign.center,
+                  Flexible(
+                    child: Container(
+                      margin: EdgeInsets.fromLTRB(0, 30, 0, 8),
+                      child: Text(
+                        'KAMAKOTI PEETHAM',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontFamily: 'GothamRoundedLight',
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 ],
@@ -60,27 +63,26 @@ class _AboutScreenState extends State<AboutScreen> {
                         children: <Widget>[
                           Container(
                             margin: EdgeInsets.fromLTRB(0, 25, 0, 15),
-                            child: SizedBox(
-                              width: 130,
-                              height: 150,
-                              child:
-                                  Image.asset('assets/images/adi_shankara.png'),
+                            child: Image.asset(
+                              'assets/images/adi_shankara.png',
+                              height: 150.0,
+                              fit: BoxFit.cover,
                             ),
                           ),
                           Container(
                             margin: EdgeInsets.fromLTRB(0, 25, 0, 15),
-                            child: SizedBox(
-                              width: 120,
-                              height: 150,
-                              child: Image.asset('assets/images/home_Devi.jpg'),
+                            child: Image.asset(
+                              'assets/images/home_Devi.jpg',
+                              height: 150.0,
+                              fit: BoxFit.cover,
                             ),
                           ),
                           Container(
                             margin: EdgeInsets.fromLTRB(0, 25, 0, 15),
-                            child: SizedBox(
-                              width: 120,
-                              height: 150,
-                              child: Image.asset('assets/images/home_HH_Rare.jpg',fit: BoxFit.contain,),
+                            child: new Image.asset(
+                              'assets/images/home_HH_Rare.jpg',
+                              height: 150.0,
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ],
@@ -88,21 +90,21 @@ class _AboutScreenState extends State<AboutScreen> {
                       Padding(
                         padding: EdgeInsets.all(8),
                         child: FutureBuilder(
-                        future: DefaultAssetBundle.of(context)
-                            .loadString('assets/about_us.txt'),
-                        builder: (context, snapshot) {
-                          return Text(
-                            snapshot.data ?? '',
-                            softWrap: true,
-                            textAlign: TextAlign.justify,
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontFamily: 'GothamRoundedLight',
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white),
-                          );
-                        },
-                      ),
+                          future: DefaultAssetBundle.of(context)
+                              .loadString('assets/about_us.txt'),
+                          builder: (context, snapshot) {
+                            return Text(
+                              snapshot.data ?? '',
+                              softWrap: true,
+                              textAlign: TextAlign.justify,
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'GothamRoundedLight',
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white),
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),
