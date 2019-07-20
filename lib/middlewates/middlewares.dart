@@ -41,8 +41,7 @@ _handleAppInit(store, action) {
 _handleFetchPosts(Store<AppState> store, action) async {
   try {
     var postListState = store.state.postListScreenState;
-    var posts = await PostRepository()
-        .getPosts(offset: postListState.offset, limit: 10);
+    var posts = await PostRepository().getPosts(offset: postListState.offset, limit: 10);
     store.dispatch(FetchPostsSuccessAction(posts));
   } catch (e) {
     print(e);
