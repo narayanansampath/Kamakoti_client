@@ -15,7 +15,7 @@ import 'package:sri_kamakoti/helpers/background_fetch_helper.dart';
 import 'package:sri_kamakoti/helpers/local_notification_helper.dart';
 
 middleware(Store<AppState> store, action, NextDispatcher next) {
-  if (action is FetchPostsAction) {
+  if (action is FetchPostsAction || action is FetchMorePostsAction) {
     _handleFetchPosts(store, action);
   } else if (action is AppInitAction) {
     _handleAppInit(store, action);
@@ -38,14 +38,13 @@ _handleAppInit(store, action) {
   LocalNotificationHelper().configureLocalNotifications(store);
 }
 
-_handleFetchPosts(
-  Store<AppState> store,
-  FetchPostsAction action,
-) async {
+_handleFetchPosts(Store<AppState> store, action) async {
   try {
-    var posts = await PostRepository().getPosts();
+    var postListState = store.state.postListScreenState;
+    var posts = await PostRepository().getPosts(offset: postListState.offset, limit: 10);
     store.dispatch(FetchPostsSuccessAction(posts));
   } catch (e) {
+    print(e);
     store.dispatch(FetchPostsErrorAction());
   }
 }

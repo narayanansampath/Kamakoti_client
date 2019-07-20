@@ -10,9 +10,9 @@ class PostRepository {
 
   PostRepository._internal();
 
-  Future<List<Post>> getPosts() async {
+  Future<List<Post>> getPosts({int offset: 0, int limit: 10}) async {
     // implement offline data retrieval logic
-    return await postApi.getPosts();
+    return await postApi.getPosts(offset: offset, limit: limit);
   }
 
   Future<List<Post>> getRecentPosts() async {

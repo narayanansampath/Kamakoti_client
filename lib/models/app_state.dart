@@ -42,19 +42,35 @@ class NavigationState {
 @immutable
 class PostListScreenState {
   final List<Post> posts;
+  final int offset;
   final bool loading;
+  final bool loadingMore;
   final bool error;
 
   factory PostListScreenState.initial() {
-    return PostListScreenState(posts: [], loading: true, error: false);
+    return PostListScreenState(
+      posts: [],
+      offset: 0,
+      loading: true,
+      loadingMore: false,
+      error: false,
+    );
   }
 
-  PostListScreenState({this.posts, this.loading, this.error});
+  PostListScreenState({
+    this.posts,
+    this.offset,
+    this.loading,
+    this.loadingMore,
+    this.error,
+  });
 
-  PostListScreenState copyWith({posts, loading, error}) {
+  PostListScreenState copyWith({posts, offset, loading, loadingMore, error}) {
     return PostListScreenState(
         posts: posts ?? this.posts,
+        offset: offset ?? this.offset,
         loading: loading ?? this.loading,
+        loadingMore: loadingMore ?? this.loadingMore,
         error: error ?? this.error);
   }
 }

@@ -2,6 +2,7 @@ import 'package:sri_kamakoti/actions/post_actions.dart';
 import 'package:sri_kamakoti/actions/actions.dart';
 import 'package:sri_kamakoti/actions/navigation_actions.dart';
 import 'package:sri_kamakoti/models/app_state.dart';
+import 'package:sri_kamakoti/models/post.dart';
 
 AppState reducer(AppState state, dynamic action) {
   return AppState(
@@ -27,14 +28,24 @@ PostListScreenState _reducePostListScreenState(AppState state, action) {
       error: false,
     );
   }
+  if (action is FetchMorePostsAction) {
+    postListScreenState = postListScreenState.copyWith(
+      loadingMore: true,
+      error: false,
+    );
+  }
   if (action is FetchPostsSuccessAction) {
     postListScreenState = postListScreenState.copyWith(
       loading: false,
-      posts: action.posts,
+      loadingMore: false,
+      posts: List<Post>.from(postListScreenState.posts)..addAll(action.posts),
+      offset: postListScreenState.offset + 10,
     );
   } else if (action is FetchPostsErrorAction) {
-    postListScreenState =
-        postListScreenState.copyWith(loading: false, error: true);
+    postListScreenState = postListScreenState.copyWith(
+      loading: false,
+      error: true,
+    );
   }
   return postListScreenState;
 }

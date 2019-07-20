@@ -21,7 +21,6 @@ class CoolTitle extends StatelessWidget {
     var value = lastSpace == -1 ? title : title.substring(0, lastSpace);
 
     return Container(
-      margin: EdgeInsets.fromLTRB(0, 25, 0, 8),
       child: Text(
         value,
         style: TextStyle(
@@ -41,7 +40,6 @@ class CoolTitle extends StatelessWidget {
     var value = title.substring(lastSpace, title.length);
 
     return Container(
-      margin: EdgeInsets.fromLTRB(7, 25, 0, 0),
       child: Text(
         value,
         style: TextStyle(
