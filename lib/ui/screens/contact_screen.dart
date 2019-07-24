@@ -208,7 +208,6 @@ class _ContactScreenState extends State<ContactScreen> {
   }
 
   launchCaller(String url) async {
-    //var url = uri;//"tel:044 2722 2115";
     if (await canLaunch(url)) {
       await launch(url);
     } else {
